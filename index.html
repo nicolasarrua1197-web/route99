@@ -944,10 +944,10 @@ function cardHTML(p,i){
   var badge=p.status==='nuevo'?'<span class="cbadge new">Nuevo</span>':p.status==='agotado'?'<span class="cbadge sold">Agotado</span>':'';
   var msg=p.status==='agotado'?'Lista de espera':'Consultar';
   var eov='<div class="eov"><button class="ebtn" onclick="openEdit('+p.id+')">✏ Editar</button><button class="ebtn del" onclick="delProduct('+p.id+')">✕ Eliminar</button></div>';
-  var qwa='<a href="'+IG+'" class="cqwa" target="_blank">'+IGSVG+' Consultar</a>';
+  var qwa='<button onclick="consultIG(\''+p.name+'\')" class="cqwa">'+IGSVG+' Consultar</button>';
   var addB=p.status!=='agotado'?'<button class="addbtn" onclick="addToCart('+p.id+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> +</button>':'';
   var tags=p.tags.map(function(t){return '<span class="ctag">'+t+'</span>';}).join('');
-  return '<div class="card rv" data-cat="'+p.cat+'" data-id="'+p.id+'"><div class="cimg">'+buildCarousel(p)+badge+eov+qwa+'<div class="cidx">0'+(i+1)+'</div></div><div class="cbody"><p class="ccat">'+catLabel(p.cat)+'</p><p class="cname">'+p.name+'</p><p class="cdesc">'+p.desc+'</p><div class="ctags">'+tags+'</div><div class="cfoot"><div class="cprice"><span class="cur">$</span>'+p.price.toLocaleString('es-UY')+'</div><div class="cacts">'+addB+'<a href="'+IG+'" class="wabtn" target="_blank">'+IGSVG+' '+msg+'</a></div></div></div></div>';
+  return '<div class="card rv" data-cat="'+p.cat+'" data-id="'+p.id+'"><div class="cimg">'+buildCarousel(p)+badge+eov+qwa+'<div class="cidx">0'+(i+1)+'</div></div><div class="cbody"><p class="ccat">'+catLabel(p.cat)+'</p><p class="cname">'+p.name+'</p><p class="cdesc">'+p.desc+'</p><div class="ctags">'+tags+'</div><div class="cfoot"><div class="cprice"><span class="cur">$</span>'+p.price.toLocaleString('es-UY')+'</div><div class="cacts">'+addB+'<button onclick="consultIG(\''+p.name+'\')" class="wabtn">'+IGSVG+' '+msg+'</button></div></div></div></div>';
 }
 function render(){
   var list=currentFilter==='todos'?products:products.filter(function(p){return p.cat===currentFilter;});
@@ -1043,7 +1043,22 @@ function closeEdit(){document.getElementById('editModal').classList.remove('open
 async function saveProduct(){var name=document.getElementById('eName').value.trim();var price=parseInt(document.getElementById('ePrice').value)||0;if(!name||!price){alert('Nombre y precio son obligatorios.');return;}var btn=document.getElementById('saveBtn');btn.textContent='Guardando...';btn.disabled=true;var data={name,price,cat:document.getElementById('eCat').value,status:document.getElementById('eStatus').value,desc:document.getElementById('eDesc').value.trim(),tags:document.getElementById('eTags').value.split(',').map(function(t){return t.trim();}).filter(Boolean),images:existingExtraPhotos.concat(extraPhotos)};try{if(editingId){if(newMainPhoto)data.img=newMainPhoto;await dbUpdate(editingId,data);showToast('Actualizado ✓');}else{data.img=newMainPhoto||'';await dbInsert(data);showToast('Agregado ✓');}sessionStorage.removeItem('iconix_products');await loadProducts();closeEdit();}catch(e){console.error(e);showToast('Error al guardar','err');}finally{btn.textContent='Guardar';btn.disabled=false;}}
 async function delProduct(id){if(!confirm('¿Eliminás este producto?'))return;try{await dbDelete(id);showToast('Eliminado');await loadProducts();}catch(e){showToast('Error','err');}}
 
-// TOAST
+function consultIG(name){
+  // Copiar nombre del producto al portapapeles
+  var txt='Hola! Me interesa la '+name;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).catch(function(){});
+  } else {
+    var ta=document.createElement('textarea');
+    ta.value=txt;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  showToast('📋 Mensaje copiado — pegalo en el DM!');
+  setTimeout(function(){window.open('https://ig.me/m/iconix_uy','_blank');},600);
+}
 var tT;
 function showToast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast'+(type?' '+type:'')+' on';clearTimeout(tT);tT=setTimeout(function(){t.classList.remove('on');},3000);}
 
