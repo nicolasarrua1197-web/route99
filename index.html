@@ -231,7 +231,7 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 .cta-h{font-family:'Anton',sans-serif;font-size:clamp(3.5rem,8vw,8rem);line-height:.9;letter-spacing:.02em;margin-bottom:1.5rem}
 .cta-h em{font-style:normal;color:var(--red)}
 .cta-sub{font-size:.95rem;color:var(--muted);margin-bottom:3rem;font-weight:300;font-style:italic}
-.cta-wa{display:inline-flex;align-items:center;gap:.8rem;background:var(--green);color:white;border:none;padding:1.1rem 2.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:none;transition:all .3s;text-decoration:none}
+.cta-wa{display:inline-flex;align-items:center;gap:.8rem;background:var(--chalk);color:var(--ink) !important;color:white;border:none;padding:1.1rem 2.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:none;transition:all .3s;text-decoration:none}
 .cta-wa:hover{filter:brightness(1.12);transform:translateY(-2px)}
 .cta-wa svg{width:18px;height:18px}
 
@@ -331,17 +331,17 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 .cart-tr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.2rem}
 .cart-tl{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .cart-tv{font-family:'Anton',sans-serif;font-size:2rem;letter-spacing:.04em}
-.cart-wa{width:100%;display:flex;align-items:center;justify-content:center;gap:.6rem;background:var(--green);color:white;border:none;padding:1rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:none;text-decoration:none;transition:all .2s}
-.cart-wa:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.cart-wa{width:100%;display:flex;align-items:center;justify-content:center;gap:.6rem;background:var(--ink3);border:1px solid rgba(255,255,255,.15);color:white;border:none;padding:1rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:none;text-decoration:none;transition:all .2s}
+.cart-wa:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
 .cart-wa svg{width:16px;height:16px}
 .cart-clr{width:100%;background:transparent;border:none;color:rgba(255,255,255,.16);font-family:'Barlow Condensed',sans-serif;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;cursor:none;margin-top:.7rem;padding:.3rem;transition:color .2s}
 .cart-clr:hover{color:var(--red)}
 
 /* WA FLOAT */
-.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:1300;width:56px;height:56px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,.35);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;cursor:none;text-decoration:none}
-.wa-float:hover{transform:scale(1.12);box-shadow:0 8px 32px rgba(37,211,102,.5)}
+.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:1300;width:56px;height:56px;background:var(--ink2);border:2px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,.4);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;cursor:none;text-decoration:none}
+.wa-float:hover{transform:scale(1.12);box-shadow:0 8px 32px rgba(0,0,0,.5)}
 .wa-float svg{width:28px;height:28px}
-.wa-float-pulse{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(37,211,102,.4);animation:wapulse 2.5s ease infinite}
+.wa-float-pulse{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(255,255,255,.15);animation:wapulse 2.5s ease infinite}
 @keyframes wapulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(1.4);opacity:0}100%{transform:scale(1.4);opacity:0}}
 
 /* TALLAS */
@@ -529,9 +529,9 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
   </div>
   <div class="cart-ft" id="cartFt" style="display:none">
     <div class="cart-tr"><span class="cart-tl">Total</span><span class="cart-tv" id="cartTv">$0</span></div>
-    <a href="#" class="cart-wa" id="cartWa" target="_blank">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Enviar pedido
+    <a href="https://www.instagram.com/iconix_uy" class="cart-wa" id="cartWa" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      Ver en Instagram
     </a>
     <button class="cart-clr" onclick="clearCart()">Vaciar carrito</button>
   </div>
@@ -553,7 +553,7 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       <span class="cbadge" id="cartBadge">0</span>
     </button>
-    <a href="https://wa.me/59899000000?text=Hola%2C%20quiero%20consultar%20sobre%20ICONIX" class="nav-cta" target="_blank">Consultar →</a>
+    <a href="https://www.instagram.com/iconix_uy" class="nav-cta" target="_blank">Instagram →</a>
   </div>
 </nav>
 
@@ -569,11 +569,11 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
     <p class="hero-desc">Estilo auténtico, calidad original. Cada remera es una declaración — diseñadas para los que no necesitan explicarse.</p>
     <div class="hero-btns">
       <a href="#catalogo" class="btn-p"><span>Ver catálogo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a href="https://wa.me/59899000000?text=Hola%2C%20quiero%20consultar%20sobre%20ICONIX" class="btn-g" target="_blank">Consultar por WA →</a>
+      <a href="https://www.instagram.com/iconix_uy" class="btn-g" target="_blank">Ver en Instagram →</a>
     </div>
     <div class="hero-stats">
       <div class="h-stat"><div class="sn" id="statTotal">—</div><div class="sl">Modelos</div></div>
-      <div class="h-stat"><div class="sn r">WA</div><div class="sl">Compra directa</div></div>
+      <div class="h-stat"><div class="sn r">IG</div><div class="sl">Seguinos</div></div>
       <div class="h-stat"><div class="sn">UY</div><div class="sl">Envíos</div></div>
     </div>
   </div>
@@ -613,9 +613,9 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 </div>
 
 <!-- WA FLOTANTE -->
-<a href="https://wa.me/59899000000?text=Hola%2C%20quiero%20consultar%20sobre%20ICONIX" class="wa-float" target="_blank" title="Consultar por WhatsApp">
+<a href="https://www.instagram.com/iconix_uy" class="wa-float" target="_blank" title="Seguinos en Instagram">
   <div class="wa-float-pulse"></div>
-  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:28px;height:28px"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
 </a>
 
 <!-- GUÍA DE TALLAS -->
@@ -651,8 +651,8 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
           <p><strong>¿Cómo medirse?</strong> Pasá la cinta métrica por la parte más ancha del pecho, debajo de las axilas. Medí en ropa interior o remera fina.</p>
         </div>
         <div class="size-wa-note">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;color:var(--green)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          ¿Seguís con dudas? <a href="https://wa.me/59899000000?text=Hola%2C%20necesito%20ayuda%20con%20la%20talla" target="_blank">Consultanos por WhatsApp</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;color:var(--red)"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          ¿Seguís con dudas? <a href="https://www.instagram.com/iconix_uy" target="_blank">Consultanos por Instagram</a>
         </div>
       </div>
       <div class="rv reveal-delay-2">
@@ -710,7 +710,7 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
       <div class="review-card rv d3">
         <div class="review-quote-icon">"</div>
         <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-        <p class="review-text">Compré la Arsenal y la Real Madrid. Las dos son una locura. El servicio por WhatsApp es rápido y muy atento. Volvería a comprar sin dudarlo.</p>
+        <p class="review-text">Compré la Arsenal y la Real Madrid. Las dos son una locura. La atención por Instagram es rápida y muy buena. Volvería a comprar sin dudarlo.</p>
         <div class="review-author">
           <div class="review-avatar">SR</div>
           <div><div class="review-name">Santiago R.</div><div class="review-loc">Canelones</div></div>
@@ -730,9 +730,9 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
   <p class="cta-kick rv">¿No encontraste lo que buscabas?</p>
   <h2 class="cta-h rv d1">HABLEMOS<br><em>AHORA.</em></h2>
   <p class="cta-sub rv d2">Escribinos y te asesoramos al toque.</p>
-  <a href="https://wa.me/59899000000?text=Hola%2C%20quiero%20consultar%20sobre%20ICONIX" class="cta-wa rv d3" target="_blank">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    Hablar por WhatsApp
+  <a href="https://www.instagram.com/iconix_uy" class="cta-wa rv d3" target="_blank">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    Seguir en Instagram
   </a>
 </div>
 
@@ -758,12 +758,12 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.2rem">Envíos</div>
       </div>
       <div style="background:var(--ink2);padding:1.4rem;text-align:center">
-        <div style="font-family:'Anton',sans-serif;font-size:2.2rem;color:var(--chalk)">WA</div>
+        <div style="font-family:'Anton',sans-serif;font-size:2.2rem;color:var(--chalk)">IG</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.2rem">Atención directa</div>
       </div>
     </div>
     <div class="mbtns" style="margin-top:1.8rem">
-      <a href="https://wa.me/59899000000?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20ICONIX" target="_blank" class="mbtn p" style="text-align:center;text-decoration:none">Contactarnos →</a>
+      <a href="https://www.instagram.com/iconix_uy" target="_blank" class="mbtn p" style="text-align:center;text-decoration:none">Contactarnos →</a>
     </div>
   </div>
 </div>
@@ -790,9 +790,9 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
     <div>
       <p style="font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem">Contacto</p>
       <div style="display:flex;flex-direction:column;gap:.7rem">
-        <a href="https://wa.me/59899000000" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;letter-spacing:.06em;color:rgba(255,255,255,.45);transition:color .2s;display:flex;align-items:center;gap:.5rem" onmouseover="this.style.color='#22c55e'" onmouseout="this.style.color='rgba(255,255,255,.45)'">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp
+        <a href="https://www.instagram.com/iconix_uy" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;letter-spacing:.06em;color:rgba(255,255,255,.45);transition:color .2s;display:flex;align-items:center;gap:.5rem" onmouseover="this.style.color='#fafafa'" onmouseout="this.style.color='rgba(255,255,255,.45)'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:13px;height:13px;flex-shrink:0"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @iconix_uy
         </a>
         <span style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;letter-spacing:.06em;color:rgba(255,255,255,.3)">Uruguay</span>
       </div>
@@ -813,10 +813,10 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 </footer>
 
 <script>
-const PASS='iconixmms2026',WA='59899000000';
+const PASS='iconixmms2026',IG='https://www.instagram.com/iconix_uy';
 const SB_URL='https://xqtgigbkwdqrjtdffgio.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxdGdpZ2Jrd2Rxcmp0ZGZmZ2lvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1MTQzMDIsImV4cCI6MjA5MTA5MDMwMn0.p8FbxP3ZpwIaGMdmAkM7h1NNj99PPHWGtUKr9U5P80I';
-const WASVG='<svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+const IGSVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;flex-shrink:0"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
 
 // LOADER
 (function(){
@@ -945,10 +945,10 @@ function cardHTML(p,i){
   var msg=p.status==='agotado'?encodeURIComponent('Hola, me quiero anotar en lista de espera para '+p.name):encodeURIComponent('Hola, me interesa la '+p.name);
   var waTxt=p.status==='agotado'?'Lista de espera':'Consultar';
   var eov='<div class="eov"><button class="ebtn" onclick="openEdit('+p.id+')">✏ Editar</button><button class="ebtn del" onclick="delProduct('+p.id+')">✕ Eliminar</button></div>';
-  var qwa='<a href="https://wa.me/'+WA+'?text='+msg+'" class="cqwa" target="_blank">'+WASVG+' Consultar</a>';
+  var qwa='<a href="https://wa.me/'+WA+'?text='+msg+'" class="cqwa" target="_blank">'+IGSVG+' Consultar</a>';
   var addB=p.status!=='agotado'?'<button class="addbtn" onclick="addToCart('+p.id+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> +</button>':'';
   var tags=p.tags.map(function(t){return '<span class="ctag">'+t+'</span>';}).join('');
-  return '<div class="card rv" data-cat="'+p.cat+'" data-id="'+p.id+'"><div class="cimg">'+buildCarousel(p)+badge+eov+qwa+'<div class="cidx">0'+(i+1)+'</div></div><div class="cbody"><p class="ccat">'+catLabel(p.cat)+'</p><p class="cname">'+p.name+'</p><p class="cdesc">'+p.desc+'</p><div class="ctags">'+tags+'</div><div class="cfoot"><div class="cprice"><span class="cur">$</span>'+p.price.toLocaleString('es-UY')+'</div><div class="cacts">'+addB+'<a href="https://wa.me/'+WA+'?text='+msg+'" class="wabtn" target="_blank">'+WASVG+' '+waTxt+'</a></div></div></div></div>';
+  return '<div class="card rv" data-cat="'+p.cat+'" data-id="'+p.id+'"><div class="cimg">'+buildCarousel(p)+badge+eov+qwa+'<div class="cidx">0'+(i+1)+'</div></div><div class="cbody"><p class="ccat">'+catLabel(p.cat)+'</p><p class="cname">'+p.name+'</p><p class="cdesc">'+p.desc+'</p><div class="ctags">'+tags+'</div><div class="cfoot"><div class="cprice"><span class="cur">$</span>'+p.price.toLocaleString('es-UY')+'</div><div class="cacts">'+addB+'<a href="https://wa.me/'+WA+'?text='+msg+'" class="wabtn" target="_blank">'+IGSVG+' '+waTxt+'</a></div></div></div></div>';
 }
 function render(){
   var list=currentFilter==='todos'?products:products.filter(function(p){return p.cat===currentFilter;});
@@ -1018,7 +1018,7 @@ function updateCart(){
   if(!cart.length){body.innerHTML='<div class="cart-mt"><div class="cart-mt-ic">🛒</div><p>Carrito vacío</p></div>';return;}
   body.innerHTML=cart.map(function(item){return '<div class="citem"><div class="ci-img">'+(item.img?'<img src="'+item.img+'" alt="">':'<span>👕</span>')+'</div><div><div class="ci-nm">'+item.name+'</div><div class="ci-pr">$'+(item.price*item.qty).toLocaleString('es-UY')+'</div><div class="ci-qt"><button class="qbtn" onclick="changeQty('+item.id+',-1)">−</button><span class="qn">'+item.qty+'</span><button class="qbtn" onclick="changeQty('+item.id+',1)">+</button></div></div><button class="ci-rm" onclick="removeFromCart('+item.id+')">✕</button></div>';}).join('');
   var waMsg=encodeURIComponent('Hola! Quiero hacer el siguiente pedido:\n'+cart.map(function(i){return '• '+i.qty+'x '+i.name+' - $'+i.price.toLocaleString('es-UY');}).join('\n')+'\n\nTotal: $'+total.toLocaleString('es-UY'));
-  document.getElementById('cartWa').href='https://wa.me/'+WA+'?text='+waMsg;
+  document.getElementById('cartWa').href='https://www.instagram.com/iconix_uy';
 }
 
 // ADMIN — acceso via ?admin=true en la URL
