@@ -23,7 +23,17 @@ a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:none}
 ::-webkit-scrollbar{width:2px}::-webkit-scrollbar-thumb{background:var(--red)}
 
-/* LOADER */
+/* SKELETON */
+.skeleton{background:linear-gradient(90deg,var(--ink2) 25%,var(--ink3) 50%,var(--ink2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:2px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skel-card{background:var(--ink2);overflow:hidden}
+.skel-img{width:100%;height:400px}
+.skel-body{padding:1.6rem 1.8rem}
+.skel-line{height:12px;margin-bottom:.8rem}
+.skel-line.short{width:40%}
+.skel-line.med{width:70%}
+.skel-line.long{width:90%}
+.skel-price{height:32px;width:30%;margin-top:1rem}
 .loader{position:fixed;inset:0;background:var(--ink);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .6s var(--expo),visibility .6s}
 .loader.hide{opacity:0;visibility:hidden}
 .loader-logo{font-family:'Anton',sans-serif;font-size:4rem;letter-spacing:.12em;color:var(--chalk);overflow:hidden}
@@ -280,6 +290,15 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 .lb-arr:hover{background:rgba(255,255,255,.1)}
 .lb-prev{left:1.5rem}.lb-next{right:1.5rem}
 .lb-cnt{position:absolute;bottom:-2.2rem;left:50%;transform:translateX(-50%);font-family:'Barlow Condensed',sans-serif;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.lb-close-mob{display:none;position:fixed;top:1.2rem;left:1.2rem;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:white;width:48px;height:48px;border-radius:50%;font-size:1.4rem;z-index:3001;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.lb-close-mob:hover{background:rgba(255,255,255,.2)}
+@media(max-width:900px){
+  .lb-close-mob{display:flex}
+  .lb-close{display:none}
+  .lb-arr{width:36px;height:36px;font-size:1rem}
+  .lb-prev{left:.5rem}.lb-next{right:.5rem}
+  #lbImg{touch-action:none}
+}
 
 /* CART */
 .cart-bd{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1400;backdrop-filter:blur(4px)}
@@ -485,6 +504,7 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 
 <!-- LIGHTBOX -->
 <div class="lb" id="lb">
+  <button class="lb-close-mob" onclick="closeLb()">✕</button>
   <div class="lb-wrap">
     <button class="lb-close" id="lbClose">✕</button>
     <img id="lbImg" src="" alt="">
@@ -834,7 +854,40 @@ var newMainPhoto=null,extraPhotos=[],existingExtraPhotos=[],cart=[];
 
 const SBH={'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY};
 async function sbFetch(path,opts){opts=opts||{};var r=await fetch(SB_URL+'/rest/v1/'+path,Object.assign({},opts,{headers:Object.assign({},SBH,opts.headers||{})}));if(!r.ok)throw new Error(await r.text());var t=await r.text();return t?JSON.parse(t):null;}
-async function loadProducts(){try{var data=await sbFetch('products?select=*&order=created_at.asc');products=data.map(function(p){return{id:p.id,name:p.name,cat:p.cat,price:p.price,desc:p.description||'',tags:p.tags||[],status:p.status||'',img:p.img||'',images:p.images||[]};});render();}catch(e){console.error(e);showToast('Error al cargar','err');document.getElementById('grid').innerHTML='<div class="ldst" style="color:rgba(255,255,255,.2);font-family:\'Barlow Condensed\',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase">Sin conexión</div>';}}
+function showSkeleton(){
+  var g=document.getElementById('grid');
+  var skels='';
+  for(var i=0;i<3;i++){
+    skels+='<div class="skel-card"><div class="skel-img skeleton"></div><div class="skel-body"><div class="skel-line short skeleton"></div><div class="skel-line med skeleton"></div><div class="skel-line long skeleton"></div><div class="skel-price skeleton"></div></div></div>';
+  }
+  g.innerHTML=skels;
+}
+
+async function loadProducts(){
+  // Mostrar cache inmediatamente si existe
+  var cached=sessionStorage.getItem('iconix_products');
+  if(cached){
+    try{
+      products=JSON.parse(cached);
+      render();
+    }catch(e){}
+  }else{
+    showSkeleton();
+  }
+  // Siempre buscar datos frescos
+  try{
+    var data=await sbFetch('products?select=*&order=created_at.asc');
+    products=data.map(function(p){return{id:p.id,name:p.name,cat:p.cat,price:p.price,desc:p.description||'',tags:p.tags||[],status:p.status||'',img:p.img||'',images:p.images||[]};});
+    sessionStorage.setItem('iconix_products',JSON.stringify(products));
+    render();
+  }catch(e){
+    console.error(e);
+    if(!products.length){
+      showToast('Sin conexión — reintentando...','err');
+      setTimeout(loadProducts,4000);
+    }
+  }
+}
 async function dbInsert(d){return sbFetch('products',{method:'POST',headers:{'Prefer':'return=representation'},body:JSON.stringify({name:d.name,cat:d.cat,price:d.price,description:d.desc,tags:d.tags,status:d.status,img:d.img||'',images:d.images||[]})});}
 async function dbUpdate(id,d){var b={name:d.name,cat:d.cat,price:d.price,description:d.desc,tags:d.tags,status:d.status,images:d.images||[]};if(d.img!==undefined)b.img=d.img;return sbFetch('products?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=representation'},body:JSON.stringify(b)});}
 async function dbDelete(id){return sbFetch('products?id=eq.'+id,{method:'DELETE'});}
@@ -999,8 +1052,8 @@ function handleMainPhoto(e){var f=e.target.files[0];if(!f)return;var r=new FileR
 function openEdit(id){var p=products.find(function(x){return x.id===id;});editingId=id;newMainPhoto=null;extraPhotos=[];existingExtraPhotos=(p.images||[]).slice();document.getElementById('editTitle').textContent='Editar';document.getElementById('eName').value=p.name;document.getElementById('ePrice').value=p.price;document.getElementById('eCat').value=p.cat;document.getElementById('eStatus').value=p.status||'';document.getElementById('eDesc').value=p.desc;document.getElementById('eTags').value=p.tags.join(', ');resetPhUI(p.img||'');renderExtraGrid();document.getElementById('editModal').classList.add('open');}
 function openAdd(){editingId=null;newMainPhoto=null;extraPhotos=[];existingExtraPhotos=[];document.getElementById('editTitle').textContent='Nuevo Producto';['eName','ePrice','eDesc','eTags'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('eCat').value='icon';document.getElementById('eStatus').value='';resetPhUI('');renderExtraGrid();document.getElementById('editModal').classList.add('open');}
 function closeEdit(){document.getElementById('editModal').classList.remove('open');editingId=null;newMainPhoto=null;extraPhotos=[];existingExtraPhotos=[];}
-async function saveProduct(){var name=document.getElementById('eName').value.trim();var price=parseInt(document.getElementById('ePrice').value)||0;if(!name||!price){alert('Nombre y precio son obligatorios.');return;}var btn=document.getElementById('saveBtn');btn.textContent='Guardando...';btn.disabled=true;var data={name,price,cat:document.getElementById('eCat').value,status:document.getElementById('eStatus').value,desc:document.getElementById('eDesc').value.trim(),tags:document.getElementById('eTags').value.split(',').map(function(t){return t.trim();}).filter(Boolean),images:existingExtraPhotos.concat(extraPhotos)};try{if(editingId){if(newMainPhoto)data.img=newMainPhoto;await dbUpdate(editingId,data);showToast('Actualizado ✓');}else{data.img=newMainPhoto||'';await dbInsert(data);showToast('Agregado ✓');}await loadProducts();closeEdit();}catch(e){console.error(e);showToast('Error al guardar','err');}finally{btn.textContent='Guardar';btn.disabled=false;}}
-async function delProduct(id){if(!confirm('¿Eliminás este producto?'))return;try{await dbDelete(id);showToast('Eliminado');await loadProducts();}catch(e){showToast('Error','err');}}
+async function saveProduct(){var name=document.getElementById('eName').value.trim();var price=parseInt(document.getElementById('ePrice').value)||0;if(!name||!price){alert('Nombre y precio son obligatorios.');return;}var btn=document.getElementById('saveBtn');btn.textContent='Guardando...';btn.disabled=true;var data={name,price,cat:document.getElementById('eCat').value,status:document.getElementById('eStatus').value,desc:document.getElementById('eDesc').value.trim(),tags:document.getElementById('eTags').value.split(',').map(function(t){return t.trim();}).filter(Boolean),images:existingExtraPhotos.concat(extraPhotos)};try{if(editingId){if(newMainPhoto)data.img=newMainPhoto;await dbUpdate(editingId,data);showToast('Actualizado ✓');}else{data.img=newMainPhoto||'';await dbInsert(data);showToast('Agregado ✓');}sessionStorage.removeItem('iconix_products');await loadProducts();closeEdit();}catch(e){console.error(e);showToast('Error al guardar','err');}finally{btn.textContent='Guardar';btn.disabled=false;}}
+async function delProduct(id){if(!confirm('¿Eliminás este producto?'))return;try{await dbDelete(id);showToast('Eliminado');sessionStorage.removeItem('iconix_products');await loadProducts();}catch(e){showToast('Error','err');}}
 
 // TOAST
 var tT;
